@@ -1,6 +1,10 @@
 #formulario {
   justify-content: center;
 }
+
+#cuerpo {
+  background-color: rgb(9, 68, 68);
+}
 img {
   width: 300px;
   height: 300px;
