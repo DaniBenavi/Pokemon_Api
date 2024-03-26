@@ -2,33 +2,38 @@ const form = document.querySelector('form')
 const inputPokemon = document.querySelector('input')
 const card = document.querySelector('.card')
 
-window.onload = () => {
-  getRandomPokemon()
-}
+window.onload = getRandomPokemon
 
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault()
-  const pokemonNameOrId = inputPokemon.value.toLowerCase()
+  const pokemonNameOrId = inputPokemon.value.trim().toLowerCase()
+
   if (pokemonNameOrId === '') {
     getRandomPokemon()
+  } else {
+    await getPokemonData(pokemonNameOrId)
   }
-
-  getPokemonData(pokemonNameOrId)
 })
 
 async function getPokemonData(nameOrId) {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameOrId}`)
+    if (!response.ok) {
+      throw new Error('Pokemon not found')
+    }
     const pokemon = await response.json()
     displayPokemonData(pokemon)
   } catch (error) {
-    console.error(error)
-    displayNotFound()
+    if (inputPokemon.value.trim() !== '') {
+      // Verifica si el campo de entrada no está vacío
+      console.error(error)
+      displayNotFound()
+    }
   }
 }
 
 function displayPokemonData(pokemon) {
-  const { name, types, stats, sprites } = pokemon
+  const { id, name, types, stats, sprites } = pokemon
   const hp = stats.find(stat => stat.stat.name === 'hp').base_stat
   const attack = stats.find(stat => stat.stat.name === 'attack').base_stat
   const defense = stats.find(stat => stat.stat.name === 'defense').base_stat
@@ -38,8 +43,8 @@ function displayPokemonData(pokemon) {
   card.innerHTML = `
   <img src="${image}" alt="${name}"/>
   <div class="card-body text-center">
-    <h2>${name}</h2>
-    <ul class="list-group list-group-flush">
+    <h2><strong>#${id} ${name}</strong></h2>
+    <ul>
       <li>Type: ${types[0].type.name}</li>
       <li>HP: ${hp}</li>
       <li>Attack: ${attack}</li>
@@ -49,6 +54,7 @@ function displayPokemonData(pokemon) {
   </div>
   `
 }
+
 function displayNotFound() {
   card.innerHTML = `<h2>Pokemon not found</h2>`
 }
@@ -62,6 +68,6 @@ async function getRandomPokemon() {
     displayPokemonData(pokemon)
   } catch (error) {
     console.error(error)
-    // handle the error here
+    displayNotFound()
   }
 }

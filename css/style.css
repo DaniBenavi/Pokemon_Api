@@ -1,8 +1,4 @@
-#formulario {
-  justify-content: center;
-}
-
-#cuerpo {
+.cuerpo {
   background-color: rgb(9, 68, 68);
 }
 img {
@@ -28,6 +24,43 @@ img {
   padding: 20px;
 }
 
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #pokemon {
-  width: 600px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.formSearch {
+  display: block;
+}
+
+.input {
+  padding: 15px;
+  font-size: 17px;
+  color: black;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  border: 2px solid #fff;
+  margin-right: -10px;
+}
+
+.button {
+  border: none;
+  background-color: #1363df;
+  text-decoration: none;
+  padding: 15px;
+  padding-bottom: 17px;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
 }
