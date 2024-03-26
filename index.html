@@ -31,6 +31,20 @@
     <div class="container text-center mb-3">
       <div class="card" style="width: 20rem"></div>
     </div>
+    <footer>
+      <div class="footer-info">
+        <p id="copyright">&copy; DaniDev</p>
+        <p>Contáctame: <a href="mailto:danibenavi1907@gmail.com">danibenavi.com</a></p>
+      </div>
+    </div>
+    </footer>
     <script src="app.js"></script>
+    <script>
+
+      var copyrightElement = document.getElementById('copyright')
+
+      var currentYear = new Date().getFullYear()
+      copyrightElement.textContent = '© ' + currentYear + ' DaniDev'
+    </script>
   </body>
 </html>

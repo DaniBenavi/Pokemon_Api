@@ -64,3 +64,13 @@ img {
   border-radius: 20px;
   cursor: pointer;
 }
+.footer-info {
+  text-align: center;
+  color: white;
+}
+
+.footer-info a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
